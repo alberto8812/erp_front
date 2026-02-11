@@ -1,0 +1,1 @@
+const headerMaintable = ["Nombre comercial", "Limite de credito", "Balance", "email", "Regimen", "Type"]

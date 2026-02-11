@@ -1,0 +1,562 @@
+/* ============================================
+   OnERP — Keycloak Login Theme
+   Design system: Corporate-executive
+   Color base: OKLCH hue 255 (cool blue)
+   ============================================ */
+
+:root {
+  /* Brand tokens */
+  --onerp-primary: #2c4a7c;
+  --onerp-primary-light: #3b6aaf;
+  --onerp-primary-dark: #1e3459;
+  --onerp-primary-bg: #eef2f8;
+  --onerp-primary-bg-hover: #dde5f0;
+
+  /* Neutrals — cool blue tinted */
+  --onerp-bg: #f8f9fb;
+  --onerp-card: #fdfdfe;
+  --onerp-muted: #f0f2f5;
+  --onerp-border: #e2e5eb;
+  --onerp-text: #1a1d24;
+  --onerp-text-muted: #6b7280;
+  --onerp-text-secondary: #4b5563;
+
+  /* Status */
+  --onerp-error: #dc2626;
+  --onerp-error-bg: #fef2f2;
+  --onerp-success: #16a34a;
+  --onerp-warning: #d97706;
+  --onerp-warning-bg: #fffbeb;
+
+  /* Shadows */
+  --onerp-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.04);
+  --onerp-shadow-md: 0 4px 12px 0 rgb(0 0 0 / 0.06);
+  --onerp-shadow-lg: 0 8px 24px 0 rgb(0 0 0 / 0.08);
+
+  /* Radius */
+  --onerp-radius: 8px;
+  --onerp-radius-sm: 6px;
+  --onerp-radius-full: 9999px;
+
+  /* Font */
+  --onerp-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ============================================
+   Base / Body
+   ============================================ */
+
+body.kcBodyClass {
+  font-family: var(--onerp-font) !important;
+  background: var(--onerp-bg) !important;
+  color: var(--onerp-text) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle gradient overlay on body */
+body.kcBodyClass::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(44, 74, 124, 0.03) 0%, transparent 50%, rgba(44, 74, 124, 0.02) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   Login Container
+   ============================================ */
+
+#kc-login {
+  position: relative;
+  z-index: 1;
+}
+
+.login-pf-page,
+#kc-container-wrapper {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ============================================
+   Card / Form Container
+   ============================================ */
+
+#kc-form-wrapper,
+.card-pf,
+#kc-content-wrapper {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.card-pf {
+  background: var(--onerp-card) !important;
+  border: 1px solid var(--onerp-border) !important;
+  border-radius: var(--onerp-radius) !important;
+  box-shadow: var(--onerp-shadow-sm) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Status rail — signature element */
+.card-pf::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--onerp-primary);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Card body padding */
+.card-pf .card-pf-body {
+  padding: 32px !important;
+}
+
+/* ============================================
+   Header / Logo
+   ============================================ */
+
+#kc-header-wrapper,
+#kc-header {
+  text-align: center;
+  padding: 0 !important;
+  margin-bottom: 8px;
+  background: none !important;
+  color: var(--onerp-text) !important;
+}
+
+/* Hide default Keycloak header text */
+#kc-header-wrapper {
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+/* Logo — injected via background image */
+#kc-header-wrapper::before {
+  content: '';
+  display: block;
+  width: 160px;
+  height: 50px;
+  margin: 0 auto 16px;
+  background: url('../img/logo.png') center / contain no-repeat;
+}
+
+/* Page title */
+#kc-page-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  color: var(--onerp-text) !important;
+  margin-bottom: 4px !important;
+}
+
+/* ============================================
+   Form Labels
+   ============================================ */
+
+label.pf-c-form__label,
+.control-label,
+label {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--onerp-text-secondary) !important;
+  margin-bottom: 6px !important;
+}
+
+/* ============================================
+   Form Inputs
+   ============================================ */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+.pf-c-form-control,
+#kc-form-login input[type="text"],
+#kc-form-login input[type="password"] {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+  font-family: var(--onerp-font) !important;
+  color: var(--onerp-text) !important;
+  background: var(--onerp-card) !important;
+  border: 1px solid var(--onerp-border) !important;
+  border-radius: var(--onerp-radius-sm) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+.pf-c-form-control:focus {
+  border-color: var(--onerp-primary) !important;
+  box-shadow: 0 0 0 3px rgba(44, 74, 124, 0.1) !important;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Form groups spacing */
+.form-group,
+.pf-c-form__group {
+  margin-bottom: 16px !important;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+/* Primary button (Login) */
+input[type="submit"],
+button[type="submit"],
+#kc-login,
+.btn-primary,
+.pf-c-button.pf-m-primary {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  font-family: var(--onerp-font) !important;
+  color: #ffffff !important;
+  background: var(--onerp-primary) !important;
+  border: none !important;
+  border-radius: var(--onerp-radius-sm) !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  letter-spacing: 0;
+  text-transform: none !important;
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover,
+.btn-primary:hover,
+.pf-c-button.pf-m-primary:hover {
+  background: var(--onerp-primary-light) !important;
+  box-shadow: var(--onerp-shadow-sm) !important;
+}
+
+input[type="submit"]:active,
+button[type="submit"]:active,
+.btn-primary:active,
+.pf-c-button.pf-m-primary:active {
+  background: var(--onerp-primary-dark) !important;
+}
+
+input[type="submit"]:focus-visible,
+button[type="submit"]:focus-visible,
+.pf-c-button.pf-m-primary:focus-visible {
+  outline: 2px solid var(--onerp-primary) !important;
+  outline-offset: 2px;
+}
+
+/* Secondary / Link buttons */
+.btn-default,
+.pf-c-button.pf-m-secondary {
+  background: transparent !important;
+  border: 1px solid var(--onerp-border) !important;
+  color: var(--onerp-text-secondary) !important;
+  border-radius: var(--onerp-radius-sm) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: background 0.15s ease;
+}
+
+.btn-default:hover,
+.pf-c-button.pf-m-secondary:hover {
+  background: var(--onerp-muted) !important;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+
+a,
+.login-pf-page a {
+  color: var(--onerp-primary) !important;
+  text-decoration: none !important;
+  font-size: 13px;
+  transition: color 0.15s ease;
+}
+
+a:hover,
+.login-pf-page a:hover {
+  color: var(--onerp-primary-light) !important;
+  text-decoration: underline !important;
+}
+
+/* Forgot password link */
+#kc-form-options,
+.kc-form-options {
+  margin-top: 12px !important;
+  text-align: center;
+}
+
+/* Registration link */
+#kc-registration,
+.kc-registration {
+  margin-top: 20px !important;
+  padding-top: 16px !important;
+  border-top: 1px solid var(--onerp-border);
+  text-align: center;
+  font-size: 13px;
+  color: var(--onerp-text-muted);
+}
+
+/* ============================================
+   Checkbox (Remember me)
+   ============================================ */
+
+.checkbox label,
+.pf-c-check__label {
+  font-size: 13px !important;
+  color: var(--onerp-text-muted) !important;
+  font-weight: 400 !important;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--onerp-primary);
+}
+
+/* ============================================
+   Alerts / Messages
+   ============================================ */
+
+.alert,
+.pf-c-alert {
+  border-radius: var(--onerp-radius-sm) !important;
+  font-size: 13px !important;
+  padding: 12px 16px !important;
+  margin-bottom: 16px !important;
+  border: 1px solid !important;
+}
+
+/* Error alert */
+.alert-error,
+.alert-danger,
+.pf-c-alert.pf-m-danger {
+  background: var(--onerp-error-bg) !important;
+  border-color: #fecaca !important;
+  color: var(--onerp-error) !important;
+}
+
+/* Warning alert */
+.alert-warning,
+.pf-c-alert.pf-m-warning {
+  background: var(--onerp-warning-bg) !important;
+  border-color: #fed7aa !important;
+  color: var(--onerp-warning) !important;
+}
+
+/* Success alert */
+.alert-success,
+.pf-c-alert.pf-m-success {
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: var(--onerp-success) !important;
+}
+
+/* Info alert */
+.alert-info,
+.pf-c-alert.pf-m-info {
+  background: var(--onerp-primary-bg) !important;
+  border-color: #bfdbfe !important;
+  color: var(--onerp-primary) !important;
+}
+
+/* ============================================
+   Social / Identity Provider Buttons
+   ============================================ */
+
+#kc-social-providers {
+  margin-top: 20px !important;
+  padding-top: 16px !important;
+  border-top: 1px solid var(--onerp-border) !important;
+}
+
+#kc-social-providers ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#kc-social-providers li {
+  margin-bottom: 8px;
+}
+
+#kc-social-providers a,
+.zocial {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  height: 40px;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--onerp-text-secondary) !important;
+  background: var(--onerp-card) !important;
+  border: 1px solid var(--onerp-border) !important;
+  border-radius: var(--onerp-radius-sm) !important;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  text-decoration: none !important;
+}
+
+#kc-social-providers a:hover,
+.zocial:hover {
+  background: var(--onerp-muted) !important;
+  border-color: #d1d5db !important;
+}
+
+/* ============================================
+   OTP / 2FA
+   ============================================ */
+
+.otp-input,
+#kc-totp-login input {
+  width: 100% !important;
+  text-align: center;
+  font-size: 20px !important;
+  letter-spacing: 4px;
+  font-family: monospace;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+#kc-info,
+.kc-info {
+  margin-top: 24px;
+  text-align: center;
+}
+
+#kc-info-wrapper {
+  font-size: 12px !important;
+  color: var(--onerp-text-muted) !important;
+}
+
+/* ============================================
+   Locale Selector
+   ============================================ */
+
+#kc-locale ul {
+  background: var(--onerp-card) !important;
+  border: 1px solid var(--onerp-border) !important;
+  border-radius: var(--onerp-radius-sm) !important;
+  box-shadow: var(--onerp-shadow-md) !important;
+}
+
+#kc-locale ul li a {
+  font-size: 13px !important;
+  padding: 8px 16px !important;
+}
+
+#kc-locale ul li a:hover {
+  background: var(--onerp-muted) !important;
+}
+
+/* ============================================
+   Miscellaneous Overrides
+   ============================================ */
+
+/* Remove default PatternFly backgrounds */
+.login-pf,
+.login-pf body,
+.login-pf-page .login-pf-page-header,
+#kc-container {
+  background: none !important;
+}
+
+/* Remove default brand image (we use our own) */
+.kc-logo-text,
+#kc-logo {
+  display: none !important;
+}
+
+/* Separator text ("or") */
+#kc-form-buttons + .separator,
+.kc-social-section .kc-social-gray {
+  color: var(--onerp-text-muted) !important;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Required field indicator */
+.required::after {
+  color: var(--onerp-error) !important;
+}
+
+/* Tooltip / help text */
+.help-block,
+.pf-c-form__helper-text {
+  font-size: 12px !important;
+  color: var(--onerp-text-muted) !important;
+  margin-top: 4px;
+}
+
+/* Password visibility toggle */
+.pf-c-button.pf-m-control {
+  border: 1px solid var(--onerp-border) !important;
+  border-left: none !important;
+  background: var(--onerp-muted) !important;
+  border-radius: 0 var(--onerp-radius-sm) var(--onerp-radius-sm) 0 !important;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 480px) {
+  #kc-container-wrapper,
+  .login-pf-page {
+    padding: 16px !important;
+  }
+
+  .card-pf .card-pf-body {
+    padding: 24px !important;
+  }
+
+  #kc-header-wrapper::before {
+    width: 130px;
+    height: 40px;
+  }
+}
+
+/* ============================================
+   Dark Mode Support (if Keycloak sends
+   prefers-color-scheme)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --onerp-bg: #0f1117;
+    --onerp-card: #181b23;
+    --onerp-muted: #1f222d;
+    --onerp-border: #2a2e3a;
+    --onerp-text: #f0f1f3;
+    --onerp-text-muted: #8b8f9a;
+    --onerp-text-secondary: #b0b4bf;
+    --onerp-primary-bg: #1a2540;
+    --onerp-primary-bg-hover: #1e2d50;
+    --onerp-error-bg: #2a1215;
+    --onerp-warning-bg: #2a2010;
+    --onerp-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.2);
+    --onerp-shadow-md: 0 4px 12px 0 rgb(0 0 0 / 0.3);
+  }
+}

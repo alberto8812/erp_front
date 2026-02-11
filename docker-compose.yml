@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  keycloak-db:
+    image: postgres:16-alpine
+    container_name: onerp-keycloak-db
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_db_password
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data
+    networks:
+      - onerp-network
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: onerp-keycloak
+    command: start-dev
+    environment:
+      # Base de datos
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak_db_password
+      # Admin inicial
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      # Proxy (para produccion detras de nginx/traefik)
+      # KC_PROXY: edge
+      # KC_HOSTNAME: auth.sudominio.com
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak/themes/onerp:/opt/keycloak/themes/onerp
+    depends_on:
+      - keycloak-db
+    networks:
+      - onerp-network
+    restart: unless-stopped
+
+volumes:
+  keycloak_data:
+
+networks:
+  onerp-network:
+    driver: bridge
